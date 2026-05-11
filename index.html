@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Flavor Route - Descubra os melhores restaurantes com as avaliações mais altas e feedbacks reais.">
+    <title>Flavor Route | Gastronomia de Elite</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Main Navigation Bar -->
+    <div class="main-nav">
+        <div class="nav-container">
+            <button class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="nav-links" id="nav-links">
+                <button class="nav-tab active" data-tab="home-tab">Home</button>
+                <button class="nav-tab" data-tab="restaurants-tab">Restaurantes</button>
+                <button class="nav-tab" data-tab="reservations-tab">Reservas</button>
+                <div class="nav-auth">
+                    <button class="login-trigger" id="login-trigger">Entrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tab Content: Home -->
+    <section id="home-tab" class="tab-content active">
+        <!-- Hero Section -->
+        <header id="hero">
+            <div class="hero-bg" id="hero-bg"></div>
+            <div class="mouse-glow" id="mouse-glow"></div>
+            <div class="hero-overlay"></div>
+            <div id="logo-container">
+                <h1>FLAVOR ROUTE</h1>
+                <p>Onde a excelência encontra o paladar</p>
+            </div>
+        </header>
+        <div class="container welcome-section">
+            <div class="welcome-text">
+                <h2>Bem-vindo à Rota ao Sabor</h2>
+                <p>Nossa missão é curar apenas o melhor. Cada restaurante aqui presente passou por um rigoroso teste de feedback e qualidade. Explore nossas rotas gastronômicas e faça sua reserva hoje mesmo.</p>
+                <button class="cta-btn" onclick="document.querySelector('[data-tab=\'restaurants-tab\']').click()">Explorar Restaurantes</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tab Content: Restaurants -->
+    <section id="restaurants-tab" class="tab-content">
+        <div class="restaurants-header">
+            <h2>Nossas Seleções</h2>
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="Busque por restaurante ou culinária...">
+            </div>
+            <!-- Navigation Filters -->
+            <nav id="secondary-nav">
+                <div class="filter-container">
+                    <div class="custom-select-wrapper">
+                        <select id="country-filter" class="filter-select">
+                            <option value="all">Selecionar País</option>
+                            <option value="França">França</option>
+                            <option value="EUA">EUA</option>
+                            <option value="México">México</option>
+                            <option value="Tailândia">Tailândia</option>
+                            <option value="Itália">Itália</option>
+                            <option value="Japão">Japão</option>
+                            <option value="Brasil">Brasil</option>
+                            <option value="Reino Unido">Reino Unido</option>
+                            <option value="Espanha">Espanha</option>
+                            <option value="Portugal">Portugal</option>
+                            <option value="Argentina">Argentina</option>
+                        </select>
+                    </div>
+                    <button class="filter-btn active" data-cuisine="all">Todos</button>
+                    <button class="filter-btn" data-cuisine="Italiana">Italiana</button>
+                    <button class="filter-btn" data-cuisine="Japonesa">Japonesa</button>
+                    <button class="filter-btn" data-cuisine="Gourmet">Gourmet</button>
+                    <button class="filter-btn" data-cuisine="Brasileira">Brasileira</button>
+                </div>
+            </nav>
+        </div>
+
+        <div class="restaurants-layout">
+            <main class="list-container">
+                <div class="restaurants-grid" id="restaurant-list">
+                    <!-- Os cards serão inseridos aqui pelo JavaScript -->
+                </div>
+            </main>
+            <aside class="map-container">
+                <div id="map-placeholder">
+                    <h3>Localização</h3>
+                    <p>Selecione um restaurante para ver no mapa.</p>
+                </div>
+                <iframe id="google-map" src="" allowfullscreen="" loading="lazy"></iframe>
+            </aside>
+        </div>
+    </section>
+
+    <!-- Tab Content: Reservations -->
+    <section id="reservations-tab" class="tab-content">
+        <div class="container reservation-form-container">
+            <div class="reservation-card">
+                <h2>Faça sua Reserva</h2>
+                <p>Garanta sua mesa nos melhores estabelecimentos da cidade.</p>
+                <form id="booking-form">
+                    <div class="form-group">
+                        <label for="res-name">Seu Nome</label>
+                        <input type="text" id="res-name" required placeholder="Como podemos chamá-lo?">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="res-restaurant">Restaurante</label>
+                            <select id="res-restaurant" required>
+                                <option value="" disabled selected>Selecione um restaurante</option>
+                                <!-- Opções preenchidas via JS -->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="res-guests">Pessoas</label>
+                            <input type="number" id="res-guests" min="1" max="20" value="2" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="res-date">Data</label>
+                            <input type="date" id="res-date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="res-time">Horário</label>
+                            <input type="time" id="res-time" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="res-table">Mesa</label>
+                        <select id="res-table" required>
+                            <option value="" disabled selected>Selecionar mesa</option>
+                            <option value="1">Mesa 01</option>
+                            <option value="2">Mesa 02</option>
+                            <option value="3">Mesa 03</option>
+                            <option value="4">Mesa 04</option>
+                            <option value="5">Mesa 05</option>
+                            <option value="6">Mesa 06</option>
+                            <option value="7">Mesa 07</option>
+                            <option value="8">Mesa 08</option>
+                            <option value="9">Mesa 09</option>
+                            <option value="10">Mesa 10</option>
+                        </select>
+                    </div>
+                    <div class="form-group coupon-group">
+                        <label for="res-coupon">Cupom de Desconto</label>
+                        <div class="coupon-input-wrapper">
+                            <input type="text" id="res-coupon" placeholder="Digite seu cupom">
+                            <button type="button" id="apply-coupon-btn" class="coupon-btn">Aplicar Desconto</button>
+                        </div>
+                        <div id="coupon-message" class="coupon-message"></div>
+                    </div>
+                    <button type="submit" class="submit-btn">Confirmar Reserva</button>
+                </form>
+                <div id="booking-message" class="booking-message"></div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Flavor Route. Criado com elegância para paladares exigentes.</p>
+    </footer>
+
+    <!-- Restaurant Details Modal -->
+    <div id="modal-overlay" class="modal-overlay"></div>
+    <div id="details-modal" class="modal-drawer">
+        <div id="modal-body" class="modal-body">
+            <!-- Conteúdo inserido via JS -->
+        </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div id="payment-modal" class="modal-drawer">
+        <div class="modal-body" style="padding: 40px;">
+            <button class="close-modal" id="close-payment-modal">&times;</button>
+            <h2 style="font-size: 2.5rem; color: var(--primary-color); margin-bottom: 20px;">Formas de Pagamento</h2>
+            <p style="color: var(--text-muted); margin-bottom: 30px;">Selecione como deseja garantir sua reserva.</p>
+            
+            <div class="payment-methods" style="display: flex; gap: 15px; margin-bottom: 30px;">
+                <button class="filter-btn payment-method-btn" data-method="credit" style="flex: 1;">Cartão de Crédito</button>
+                <button class="filter-btn payment-method-btn" data-method="pix" style="flex: 1;">Pix</button>
+            </div>
+
+            <div id="payment-details-container" style="display: none; margin-bottom: 30px;">
+                <!-- Credit Card Form -->
+                <div id="credit-form" style="display: none;">
+                    <div class="form-group">
+                        <label>Número do Cartão</label>
+                        <input type="text" placeholder="0000 0000 0000 0000">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Validade</label>
+                            <input type="text" placeholder="MM/AA">
+                        </div>
+                        <div class="form-group">
+                            <label>CVV</label>
+                            <input type="text" placeholder="123">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pix Info -->
+                <div id="pix-info" style="display: none; text-align: center;">
+                    <p style="margin-bottom: 15px;">Escaneie o QR Code ou copie a chave Pix abaixo:</p>
+                    <div style="width: 150px; height: 150px; background: #fff; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; border-radius: 8px;">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=00020126360014br.gov.bcb.pix0114+5511999999999520400005303986540510.005802BR5915Flavor%20Route6009Sao%20Paulo62070503***6304" alt="QR Code Pix" style="max-width: 100%;">
+                    </div>
+                    <p style="font-family: monospace; background: rgba(255,255,255,0.1); padding: 10px; border-radius: 4px; word-break: break-all;">00020126360014br.gov.bcb.pix0114...</p>
+                </div>
+            </div>
+
+            <button class="submit-btn" id="confirm-payment-btn" style="display: none;">Finalizar Reserva</button>
+        </div>
+    </div>
+
+    <!-- Login/Register Modal -->
+    <div id="auth-modal" class="modal-drawer auth-modal">
+        <div class="modal-body">
+            <button class="close-modal" id="close-auth-modal">&times;</button>
+            <div class="auth-tabs">
+                <button class="auth-tab active" data-auth="login">Login</button>
+                <button class="auth-tab" data-auth="register">Cadastro</button>
+            </div>
+            
+            <!-- Login Form -->
+            <div id="login-form-container" class="auth-form-container active">
+                <form id="login-form" class="auth-form">
+                    <div class="form-group">
+                        <label for="login-email">E-mail</label>
+                        <input type="email" id="login-email" required placeholder="seu@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="login-pass">Senha</label>
+                        <input type="password" id="login-pass" required placeholder="••••••••">
+                    </div>
+                    <button type="submit" class="submit-btn">Entrar</button>
+                </form>
+            </div>
+
+            <!-- Register Form -->
+            <div id="register-form-container" class="auth-form-container">
+                <form id="register-form" class="auth-form">
+                    <div class="form-group">
+                        <label for="reg-name">Nome Completo</label>
+                        <input type="text" id="reg-name" required placeholder="Seu nome">
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-email">E-mail</label>
+                        <input type="email" id="reg-email" required placeholder="seu@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-pass">Senha</label>
+                        <input type="password" id="reg-pass" required placeholder="Crie uma senha">
+                    </div>
+                    <button type="submit" class="submit-btn">Criar Conta</button>
+                </form>
+            </div>
+
+            <div class="auth-divider">
+                <span>ou</span>
+            </div>
+
+            <button class="google-btn" id="google-login">
+                <img src="https://www.gstatic.com/images/branding/product/1x/gsa_512dp.png" alt="Google">
+                Continuar com Google
+            </button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
